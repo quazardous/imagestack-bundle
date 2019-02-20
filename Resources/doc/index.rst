@@ -5,6 +5,7 @@ Installation
 ------------
 
 .. code:: bash
+
     composer require quazardous/imagestack-bundle
 
 Config
@@ -16,6 +17,7 @@ NB: for SF4
 Imagestack config:
 
 .. code:: yaml
+
    # config/packages/quazardous_imagestack.yaml
    
    parameters:
@@ -136,6 +138,7 @@ Imagestack config:
 Routing:
 
 .. code:: yaml
+
    # config/routes/imagestack.yaml
    
    imagestack_public:
