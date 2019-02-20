@@ -1,0 +1,142 @@
+parameters:
+    quazardous_imagestack.jpegtran: /usr/bin/jpegtran
+    quazardous_imagestack.pngcrush: /usr/bin/pngcrush
+    quazardous_imagestack.gifsicle: /usr/bin/gifsicle
+    quazardous_imagestack.default_imagestack_route: ~
+    quazardous_imagestack.imagestack_assets_version: ~
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        
+    Imagine\Image\ImagineInterface:
+        alias: quazardous_imagestack.imagine
+        
+    quazardous_imagestack.imagine:
+        alias: quazardous_imagestack.imagine_gd
+
+    quazardous_imagestack.imagine_gd:
+        class: Imagine\Gd\Imagine
+    quazardous_imagestack.imagine_imagick:
+        class: Imagine\Imagick\Imagine
+    quazardous_imagestack.imagine_gmagick:
+        class: Imagine\Gmagick\Imagine
+
+    Quazardous\ImagestackBundle\ImageStack\ImageStackManager: ~
+    quazardous_imagestack.image_stack_manager:
+        alias: Quazardous\ImagestackBundle\ImageStack\ImageStackManager
+
+    Quazardous\ImagestackBundle\ImageBackend\ImageBackendProvider: ~
+    quazardous_imagestack.image_backend_provider:
+        alias: Quazardous\ImagestackBundle\ImageBackend\ImageBackendProvider
+        
+    Quazardous\ImagestackBundle\StorageBackend\StorageBackendProvider: ~
+    quazardous_imagestack.storage_backend_provider:
+        alias: Quazardous\ImagestackBundle\StorageBackend\StorageBackendProvider
+        
+    Quazardous\ImagestackBundle\ImageManipulator\ImageManipulatorProvider: ~
+    quazardous_imagestack.image_manipulator_provider:
+        alias: Quazardous\ImagestackBundle\ImageManipulator\ImageManipulatorProvider
+        
+    Quazardous\ImagestackBundle\ImageOptimizer\ImageOptimizerProvider: ~
+    quazardous_imagestack.image_optimizer_provider:
+        alias: Quazardous\ImagestackBundle\ImageOptimizer\ImageOptimizerProvider
+
+    Quazardous\ImagestackBundle\ThumbnailRule\ThumbnailRuleProvider: ~
+    quazardous_imagestack.thumbnail_rule_provider:
+        alias: Quazardous\ImagestackBundle\ThumbnailRule\ThumbnailRuleProvider
+
+    Quazardous\ImagestackBundle\PathRule\PathRuleProvider: ~
+    quazardous_imagestack.path_rule_provider:
+        alias: Quazardous\ImagestackBundle\PathRule\PathRuleProvider
+    
+    Quazardous\ImagestackBundle\Cache\CacheProvider: ~
+    quazardous_imagestack.cache_provider:
+        alias: Quazardous\ImagestackBundle\Cache\CacheProvider
+
+
+    _instanceof:
+        Quazardous\ImagestackBundle\ImageBackend\ImageBackendFactoryInterface:
+            tags: ['quazardous_imagestack.image_backend_factory']
+        Quazardous\ImagestackBundle\StorageBackend\StorageBackendFactoryInterface:
+            tags: ['quazardous_imagestack.storage_backend_factory']
+        Quazardous\ImagestackBundle\ImageManipulator\ImageManipulatorFactoryInterface:
+            tags: ['quazardous_imagestack.image_manipulator_factory']
+        Quazardous\ImagestackBundle\ImageOptimizer\ImageOptimizerFactoryInterface:
+            tags: ['quazardous_imagestack.image_optimizer_factory']
+        Quazardous\ImagestackBundle\ThumbnailRule\ThumbnailRuleFactoryInterface:
+            tags: ['quazardous_imagestack.thumbnail_rule_factory']
+        Quazardous\ImagestackBundle\PathRule\PathRuleFactoryInterface:
+            tags: ['quazardous_imagestack.path_rule_factory']
+        Quazardous\ImagestackBundle\Cache\CacheFactoryInterface:
+            tags: ['quazardous_imagestack.cache_factory']
+
+
+    Quazardous\ImagestackBundle\ImageBackend\Factory\:
+        resource: '../../ImageBackend/Factory/*'
+    Quazardous\ImagestackBundle\StorageBackend\Factory\:
+        resource: '../../StorageBackend/Factory/*'
+    Quazardous\ImagestackBundle\ImageManipulator\Factory\:
+        resource: '../../ImageManipulator/Factory/*'
+    Quazardous\ImagestackBundle\ImageOptimizer\Factory\:
+        resource: '../../ImageOptimizer/Factory/*'
+    Quazardous\ImagestackBundle\ThumbnailRule\Factory\:
+        resource: '../../ThumbnailRule/Factory/*'
+    Quazardous\ImagestackBundle\PathRule\Factory\:
+        resource: '../../PathRule/Factory/*'
+    Quazardous\ImagestackBundle\Cache\Factory\:
+        resource: '../../Cache/Factory/*'
+
+
+    Quazardous\ImagestackBundle\ImageOptimizer\Factory\JpegtranImageOptimizerFactory:
+        arguments:
+            $defaultDefinition:
+                jpegtran: '%quazardous_imagestack.jpegtran%'
+
+    Quazardous\ImagestackBundle\ImageOptimizer\Factory\PngcrushImageOptimizerFactory:
+        arguments:
+            $defaultDefinition:
+                pngcrush: '%quazardous_imagestack.pngcrush%'
+
+#
+#    quazardous_imagestack.raw_file_cache_provider:
+#        class: "MyCustomType"
+
+    quazardous_imagestack.image_optimizer.jpegtran:
+        class: ImageStack\ImageOptimizer\JpegtranImageOptimizer
+        factory: 'quazardous_imagestack.image_optimizer_provider:createImageOptimizer'
+        arguments: ['jpegtran']
+
+    quazardous_imagestack.image_optimizer.pngcrush:
+        class: ImageStack\ImageOptimizer\PngcrushImageOptimizer
+        factory: 'quazardous_imagestack.image_optimizer_provider:createImageOptimizer'
+        arguments: ['pngcrush']
+
+    quazardous_imagestack.image_optimizer.gifsicle:
+        class: ImageStack\ImageOptimizer\GifsicleImageOptimizer
+        factory: 'quazardous_imagestack.image_optimizer_provider:createImageOptimizer'
+        arguments: ['gifsicle']
+    
+    Quazardous\ImagestackBundle\Service\ImageUrlGenerator:
+        class: Quazardous\ImagestackBundle\Service\ImageUrlGenerator
+        arguments:
+            $defaultImagestackRoute: '%quazardous_imagestack.default_imagestack_route%'
+            $imagestackAssetsVersion: '%quazardous_imagestack.imagestack_assets_version%'
+        
+    quazardous_imagestack.url_generator:
+        alias: Quazardous\ImagestackBundle\Service\ImageUrlGenerator
+        
+    Quazardous\ImagestackBundle\Twig\ImagestackExtension:
+        tags: ['twig.runtime']
+    
+    quazardous_imagestack.default_controller:
+        class: Quazardous\ImagestackBundle\Controller\ImagestackController
+        arguments: 
+            $imageStack: '@?quazardous_imagestack.default_stack'
+
+#    _instanceof:
+#        Quazardous\ImagestackBundle\Factory\ImageBackendFactoryInterface:
+#            tags:
+#                - { name: 'quazardous_imagestack.image_backend_factory', alias: }
