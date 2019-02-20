@@ -1,10 +1,14 @@
-# Imagestack Bundle
+Imagestack Bundle
+=================
 
-## Installation
+Installation
+------------
 
+.. code:: bash
      composer require quazardous/imagestack-bundle
 
-## Config
+Config
+------
 
 NB: for SF4
 
@@ -131,7 +135,7 @@ Imagestack config:
 
 Routing:
 
-.... code-block:: yaml
+.. code-block:: yaml
     # config/routes/imagestack.yaml
     
 	imagestack_public:
