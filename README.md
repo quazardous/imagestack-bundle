@@ -12,7 +12,7 @@ Here is a [Symfony 4](https://symfony.com/4) bundle for [ImageStack](https://git
 
 ## Config
 
-see [Resources/doc/index.rst](https://github.com/quazardous/imagestack-bundle/Resources/doc/index.rst)
+see [Resources/doc/index.rst](https://github.com/quazardous/imagestack-bundle/blob/master/Resources/doc/index.rst)
 
 ## Usage
 
