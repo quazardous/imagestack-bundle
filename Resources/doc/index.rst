@@ -15,7 +15,7 @@ NB: for SF4
 
 Imagestack config:
 
-.. code-block:: yaml
+.. code:: yaml
    # config/packages/quazardous_imagestack.yaml
    
    parameters:
@@ -135,7 +135,7 @@ Imagestack config:
 
 Routing:
 
-.. code-block:: yaml
+.. code:: yaml
    # config/routes/imagestack.yaml
    
    imagestack_public:
