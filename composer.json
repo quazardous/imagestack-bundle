@@ -2,6 +2,7 @@
 	"name" : "quazardous/imagestack-bundle",
 	"type" : "symfony-bundle",
     "description" : "ImageStack Bundle",
+    "keywords": ["symfony","image","thumbnail","watermark"],
     "license" : "MIT",
     "authors" : [{
             "name" : "Quazardous",
