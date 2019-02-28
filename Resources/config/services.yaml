@@ -110,7 +110,7 @@ services:
             $defaultDefinition:
                 pngcrush: '%quazardous_imagestack.pngcrush%'
 
-    Quazardous\ImagestackBundle\ThumbnailRule\Factory\PatternPathRuleFactory:
+    Quazardous\ImagestackBundle\ThumbnailRule\Factory\PatternThumbnailRuleFactory:
         arguments:
             $defaultThumbnailFilter: '%quazardous_imagestack.default_thumbnail_filter%'
 
