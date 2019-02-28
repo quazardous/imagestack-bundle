@@ -4,6 +4,8 @@ parameters:
     quazardous_imagestack.gifsicle: /usr/bin/gifsicle
     quazardous_imagestack.default_imagestack_route: ~
     quazardous_imagestack.imagestack_assets_version: ~
+    quazardous_imagestack.default_thumbnail_filter: !php/const Imagine\Image\ImageInterface::FILTER_UNDEFINED
+    quazardous_imagestack.imagine_options: []
 
 services:
     _defaults:
@@ -23,6 +25,14 @@ services:
         class: Imagine\Imagick\Imagine
     quazardous_imagestack.imagine_gmagick:
         class: Imagine\Gmagick\Imagine
+    
+    quazardous_imagestack.imagine_options:
+        class: Quazardous\ImagestackBundle\Imagine\ImagineOptions
+        arguments:
+            $options: "%quazardous_imagestack.imagine_options%"
+        
+    Quazardous\ImagestackBundle\Imagine\ImagineOptionsInterface:
+        alias: quazardous_imagestack.imagine_options
 
     Quazardous\ImagestackBundle\ImageStack\ImageStackManager: ~
     quazardous_imagestack.image_stack_manager:
@@ -99,6 +109,10 @@ services:
         arguments:
             $defaultDefinition:
                 pngcrush: '%quazardous_imagestack.pngcrush%'
+
+    Quazardous\ImagestackBundle\ThumbnailRule\Factory\PatternPathRuleFactory:
+        arguments:
+            $defaultThumbnailFilter: '%quazardous_imagestack.default_thumbnail_filter%'
 
 #
 #    quazardous_imagestack.raw_file_cache_provider:

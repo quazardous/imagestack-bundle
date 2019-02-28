@@ -6,6 +6,7 @@ use Quazardous\ImagestackBundle\ImageManipulator\ImageManipulatorFactoryInterfac
 use Quazardous\ImagestackBundle\ThumbnailRule\ThumbnailRuleProvider;
 use ImageStack\ImageManipulator\ThumbnailerImageManipulator;
 use Imagine\Image\ImagineInterface;
+use Quazardous\ImagestackBundle\Imagine\ImagineOptionsInterface;
 
 class ThumbnailerImageManipulatorFactory implements ImageManipulatorFactoryInterface
 {
@@ -15,13 +16,19 @@ class ThumbnailerImageManipulatorFactory implements ImageManipulatorFactoryInter
     protected $imagine;
     
     /**
+     * @var ImagineOptionsInterface
+     */
+    protected $imagineOptions;
+    
+    /**
      * @var ThumbnailRuleProvider
      */
     protected $thumbnailRuleProvider;
     
-    public function __construct(ImagineInterface $imagine, ThumbnailRuleProvider $thumbnailRuleProvider)
+    public function __construct(ImagineInterface $imagine, ImagineOptionsInterface $imagineOptions, ThumbnailRuleProvider $thumbnailRuleProvider)
     {
         $this->imagine = $imagine;
+        $this->imagineOptions = $imagineOptions;
         $this->thumbnailRuleProvider = $thumbnailRuleProvider;
     }
     
@@ -44,6 +51,7 @@ class ThumbnailerImageManipulatorFactory implements ImageManipulatorFactoryInter
             }
             unset($definition['rules']);
         }
+        $definition['imagine_options'] = array_replace($definition['imagine_options'] ?? [], $this->imagineOptions->getOptions());
         return new ThumbnailerImageManipulator($this->imagine, $rules, $definition);
     }
     

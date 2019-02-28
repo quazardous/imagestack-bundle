@@ -7,6 +7,7 @@ use Quazardous\ImagestackBundle\ThumbnailRule\ThumbnailRuleProvider;
 use ImageStack\ImageManipulator\ThumbnailerImageManipulator;
 use Imagine\Image\ImagineInterface;
 use ImageStack\ImageManipulator\WatermarkImageManipulator;
+use Quazardous\ImagestackBundle\Imagine\ImagineOptionsInterface;
 
 class WatermarkImageManipulatorFactory implements ImageManipulatorFactoryInterface
 {
@@ -15,9 +16,15 @@ class WatermarkImageManipulatorFactory implements ImageManipulatorFactoryInterfa
      */
     protected $imagine;
     
-    public function __construct(ImagineInterface $imagine)
+    /**
+     * @var ImagineOptionsInterface
+     */
+    protected $imagineOptions;
+    
+    public function __construct(ImagineInterface $imagine, ImagineOptionsInterface $imagineOptions)
     {
         $this->imagine = $imagine;
+        $this->imagineOptions = $imagineOptions;
     }
     
     public function getType()
@@ -69,6 +76,7 @@ class WatermarkImageManipulatorFactory implements ImageManipulatorFactoryInterfa
                 $definition['reduce'] = $reduce;
             }
         }
+        $definition['imagine_options'] = array_replace($definition['imagine_options'] ?? [], $this->imagineOptions->getOptions());
         return new WatermarkImageManipulator($this->imagine, $watermark, $definition);
     }
     

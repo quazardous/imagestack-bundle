@@ -53,7 +53,7 @@ Imagestack config:
               $root: '%kernel.project_dir%/images'
               $doSomethingCool: true # you see it does cool stuff !
    
-      # backend fetch images, then tries to fetch score images
+      # backend fetch images, then tries to fetch cooler images
       app.imagestack_image_backend.try_many_backends:
           class: ImageStack\ImageBackend\SequentialImageBackend
           factory: 'quazardous_imagestack.image_backend_provider:createImageBackend'
