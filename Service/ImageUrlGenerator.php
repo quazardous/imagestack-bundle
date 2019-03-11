@@ -13,7 +13,7 @@ class ImageUrlGenerator
     
     protected $defaultImagestackRoute;
     protected $imagestackAssetsVersion;
-    public function __construct(UrlGeneratorInterface $urlGenerator, string $defaultImagestackRoute, string $imagestackAssetsVersion)
+    public function __construct(UrlGeneratorInterface $urlGenerator, string $defaultImagestackRoute, ?string $imagestackAssetsVersion)
     {
         $this->urlGenerator = $urlGenerator;
         $this->defaultImagestackRoute = $defaultImagestackRoute;
