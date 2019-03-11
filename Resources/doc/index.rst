@@ -147,3 +147,15 @@ Routing:
       requirements:
           path: ".+" # important
 
+Need to handle proxy and image version ? Just add some hash slug in your route !
+
+.. code:: yaml
+
+   # config/routes/imagestack.yaml
+   
+   imagestack_public:
+      # Not so difficult :p
+      path:     /images/a4f8e1b2/{path}
+      controller: quazardous_imagestack.default_controller::image
+      requirements:
+          path: ".+" # important
