@@ -30,6 +30,16 @@ Behind the curtain, Imagestack we generate and optimize `images/style/thumb/foo/
 
 So next HTTP call will be statically serverd.
 
+## Advanced usage
+
+With **Imagestack** you can stack components like bricks.
+
+Say you need to serve images from your new CMS but also images from old stuff you have imported "as it" with heteroclite image sources...
+
+You can build a stack with a sequential image backend wich will try to fetch given path from different backends including "legacy" HTTP Proxy backends.
+
+You can of course internally rewrite the path with "kitchen rules" to fetch the legacy images.
+
 ## Twig
 
 Imagestack has a Twig filter and function `imagestack`.
