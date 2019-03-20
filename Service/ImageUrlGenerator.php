@@ -23,14 +23,15 @@ class ImageUrlGenerator
     /**
      * @param string $path
      * @param string $style
+     * @param int $referenceType
      * @param string $name
      * @return string
      */
-    public function generateUrl(string $path, string $style = '' , string $route = null)
+    public function generateUrl(string $path, string $style = '' , $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH, string $route = null)
     {
         if (empty($route)) $route = $this->defaultImagestackRoute;
         $parameters = ['path' => ($style ? $style . '/' : '') . $path];
-        $url = $this->urlGenerator->generate($route, $parameters);
+        $url = $this->urlGenerator->generate($route, $parameters, $referenceType);
         if ($this->imagestackAssetsVersion) {
             $url .= '?' . $this->imagestackAssetsVersion;
         }

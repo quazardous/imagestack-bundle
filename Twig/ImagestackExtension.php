@@ -6,6 +6,7 @@ use Twig\Extension\AbstractExtension;
 use Quazardous\ImagestackBundle\Service\ImageUrlGenerator;
 use Twig\TwigFunction;
 use Twig\TwigFilter;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ImagestackExtension extends AbstractExtension
 {
@@ -32,8 +33,8 @@ class ImagestackExtension extends AbstractExtension
         ];
     }
     
-    public function imagestackUrl(string $path, $style = null, $route = null)
+    public function imagestackUrl(string $path, $style = null, $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH, $route = null)
     {
-        return $this->imageUrlGenerator->generateUrl($path, $style, $route);
+        return $this->imageUrlGenerator->generateUrl($path, $style, $referenceType, $route);
     }
 }
