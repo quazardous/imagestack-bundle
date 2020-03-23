@@ -25,6 +25,8 @@ Imagestack config:
       quazardous_imagestack.default_imagestack_route: 'imagestack_public'
       # this will add ?20190211170600 at the end of all image URL (usefull for cache stuff)
       quazardous_imagestack.imagestack_assets_version: '20190211170600'
+      # add a default image
+      quazardous_imagestack.empty_path_fallback: 'empty.jpg'
       
    quazardous_imagestack:
       # nothing yet

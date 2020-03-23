@@ -4,6 +4,7 @@ parameters:
     quazardous_imagestack.gifsicle: /usr/bin/gifsicle
     quazardous_imagestack.default_imagestack_route: ~
     quazardous_imagestack.imagestack_assets_version: ~
+    quazardous_imagestack.empty_path_fallback: ~
     quazardous_imagestack.default_thumbnail_filter: !php/const Imagine\Image\ImageInterface::FILTER_UNDEFINED
     quazardous_imagestack.imagine_options: []
 
@@ -137,6 +138,7 @@ services:
         class: Quazardous\ImagestackBundle\Service\ImageUrlGenerator
         arguments:
             $defaultImagestackRoute: '%quazardous_imagestack.default_imagestack_route%'
+            $emptyPathFallback: '%quazardous_imagestack.empty_path_fallback%'
             $imagestackAssetsVersion: '%quazardous_imagestack.imagestack_assets_version%'
         
     quazardous_imagestack.url_generator:

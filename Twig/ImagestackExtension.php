@@ -33,7 +33,7 @@ class ImagestackExtension extends AbstractExtension
         ];
     }
     
-    public function imagestackUrl(string $path, $style = null, $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH, $route = null)
+    public function imagestackUrl(?string $path, $style = null, $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH, $route = null)
     {
         return $this->imageUrlGenerator->generateUrl($path, $style, $referenceType, $route);
     }
